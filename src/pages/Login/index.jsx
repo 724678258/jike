@@ -3,12 +3,17 @@ import './index.scss'
 import logo from '@/assets/logo.png'
 import { fetchLogin } from '@/store/modules/uesr';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { message } from 'antd';
 
 const Login = () => {
     const dispatch = useDispatch()
-    const onFinish = (values) => {
+    const navigate = useNavigate()
+    const onFinish = async (values) => {
         console.log(values);
-        dispatch(fetchLogin(values))
+        await dispatch(fetchLogin(values))
+        navigate('/')
+        message.success('登录成功')
     }
     return(
         <div className = 'login' >
